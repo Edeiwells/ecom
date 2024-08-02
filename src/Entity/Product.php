@@ -36,10 +36,16 @@ class Product
     #[ORM\ManyToOne(inversedBy: 'products')]
     private ?Cart $cart = null;
 
+    public function __construct()
+    {
+        $this->ref = uniqid('ITEM_');
+    }
+
     public function getId(): ?int
     {
         return $this->id;
     }
+
 
     public function getRef(): ?string
     {
@@ -123,5 +129,9 @@ class Product
         $this->cart = $cart;
 
         return $this;
+    }
+    public function __toString()
+    {
+        return $this->name;
     }
 }

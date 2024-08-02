@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\Category;
 use Faker\Factory;
 use App\Entity\Product;
+use App\Entity\User;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Faker\Core\Uuid;
@@ -14,6 +15,18 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create('fr_FR');
+
+        $admin = new User(); // permet de créer un user
+
+        $admin
+
+            ->setEmail('admin@admin.fr')
+
+            ->setPassword('$2y$13$YUnqqIduvA6XEVQEJ7wtEehT9RcZsSmHhDNEBA2l3AMcF9/DD5YbC')
+
+            ->setRoles(['ROLE_ADMIN']);
+
+        $manager->persist($admin);
 
         // ----- Liste des catégories -----
         $categoryList = [
